@@ -14,10 +14,10 @@ const Banking = () => {
     } 
   }
 0
-  function Withdraw() {
-    const withdrawBy = parseFloat(amount);
-    if (withdrawBy > 0 && withdrawBy <= balance) {
-      setBalance(balance - withdrawBy)
+  function expanse() {
+    const expanseBy = parseFloat(amount);
+    if (expanseBy > 0 && expanseBy <= balance) {
+      setBalance(balance - expanseBy)
       setAmount('')
     }
   }
@@ -27,7 +27,20 @@ const Banking = () => {
 
       <h1>Banking System</h1>
 
+        <h3>Current Balance: ${balance}</h3>
+        <br />
+
       <div className="input-container">
+
+        
+
+        <button className='button-48' onClick={Deposit}>Deposit</button> 
+        <button className='button-48' onClick={expanse}>Expanse</button>
+
+
+        
+
+
         <input
           type="number"
           value={amount}
@@ -35,14 +48,11 @@ const Banking = () => {
           placeholder="Enter amount"
         />
 
-        <button onClick={Deposit}>Deposit</button>
-        <button onClick={Withdraw}>Withdraw</button>
 
 
       </div>
 
 
-      <h3>Current Balance: ${balance}</h3>
 
     </div>
   )
