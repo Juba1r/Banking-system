@@ -82,9 +82,15 @@ input {
   width: 200px; 
 }
 
-.submit-btn{
-
+.submit-btn {
+  background-color: #26c7ca;
+  color: rgb(251, 251, 251);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-
-
+.submit-btn:hover {
+  background-color: #bcd917;
+}
