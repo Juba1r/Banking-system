@@ -6,13 +6,18 @@ const Banking = () => {
   const [amount, setAmount] = useState("");
   const [showD, setShowD] = useState(true);
   const [showE, setShowE] = useState(true);
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+  });
 
   function Deposit() {
     const depositBy = parseFloat(amount);
     if (depositBy > 0) {
       setBalance(balance + depositBy);
       setAmount("");
-      setShowD(true);
+      setShowD(true); 
+      showNotification("Your Deposit successful!");
     }
   }
 
@@ -21,8 +26,14 @@ const Banking = () => {
     if (expanseBy > 0 && expanseBy <= balance) {
       setBalance(balance - expanseBy);
       setAmount("");
-      setShowE(true);
+      setShowE(true); 
+      showNotification("Your Expense recorded!");
     }
+  }
+
+  function showNotification(message) {
+    setNotification({ show: true, message });
+    setTimeout(() => setNotification({ show: false, message: "" }), 3000); 
   }
 
   return (
@@ -39,18 +50,16 @@ const Banking = () => {
           </button>
         </div>
 
-        {!showD &&  (
+        {!showD && (
           <div className="inptmodify-deposit">
             <h2>Deposit</h2>
             <div className="name-container">
               <label htmlFor="Name">Name : </label>
-
-              <input type="Name" placeholder="Enter the reason" />
+              <input type="text" placeholder="Enter the reason" />
             </div>
 
             <div className="amount-container">
               <label htmlFor="amount">Amount : </label>
-
               <input
                 type="number"
                 value={amount}
@@ -59,23 +68,22 @@ const Banking = () => {
               />
             </div>
 
-            <button className="submit-btn" onClick={Deposit}>Submit</button>
+            <button className="submit-btn" onClick={Deposit}>
+              Submit
+            </button>
           </div>
         )}
 
-        {!showE &&  (
+        {!showE && (
           <div className="inptmodify-expanse">
             <h2>Expanse</h2>
-
             <div className="name-container">
               <label htmlFor="Name">Name : </label>
-
-              <input type="Name" placeholder="Enter the reason" />
+              <input type="text" placeholder="Enter the reason" />
             </div>
 
             <div className="amount-container">
               <label htmlFor="amount">Amount : </label>
-
               <input
                 type="number"
                 value={amount}
@@ -84,10 +92,21 @@ const Banking = () => {
               />
             </div>
 
-            <button className="submit-btn" onClick={Expanse}>Submit</button>
+            <button className="submit-btn" onClick={Expanse}>
+              Submit
+            </button>
           </div>
         )}
       </div>
+
+      {notification.show && (
+        <div
+          className="notification"
+          onClick={() => setNotification({ show: false, message: "" })}
+        >
+          {notification.message}
+        </div>
+      )}
     </div>
   );
 };
