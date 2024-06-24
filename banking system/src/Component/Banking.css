@@ -49,16 +49,18 @@ input {
   margin-bottom: 20px; 
 }
 
-.inptmodify{
+.inptmodify-deposit,
+.inptmodify-expanse{
   display: flex;
   flex-direction: column;
   align-items: center; 
-  gap: 30px; 
+  gap: 20px; 
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #000000;
   color: white;
+  margin-top: 5%;
 }
 
 .name-container,
@@ -72,6 +74,15 @@ input {
 .name-container label,
 .amount-container label {
   margin-bottom: 0; 
+  width: 100px; 
 }
 
+.name-container input,
+.amount-container input {
+  width: 200px; 
+}
+
+.submit-btn{
+
+}
 
