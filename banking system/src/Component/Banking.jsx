@@ -4,6 +4,7 @@ import "./Banking.css";
 const Banking = () => {
   const [balance, setBalance] = useState(0);
   const [amount, setAmount] = useState("");
+  
 
   function Deposit() {
     const depositBy = parseFloat(amount);
@@ -21,6 +22,7 @@ const Banking = () => {
     }
   }
 
+
   return (
     <div className="banking-container">
       <h1>Banking System</h1>
@@ -33,6 +35,7 @@ const Banking = () => {
           <button className="button-52" onClick={expanse}>
             Expanse
           </button>
+        
         </div>
 
         <div className="inptmodify-deposit">
@@ -89,3 +92,5 @@ const Banking = () => {
 };
 
 export default Banking;
+
+
