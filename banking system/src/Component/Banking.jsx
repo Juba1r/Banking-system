@@ -13,27 +13,35 @@ const Banking = () => {
 
   function Deposit() {
     const depositBy = parseFloat(amount);
-    if (depositBy > 0) {
-      setBalance(balance + depositBy);
-      setAmount("");
-      setShowD(true); 
-      showNotification("Your Deposit successful!");
+    if (amount === "" || depositBy <= 0) {
+      showNotification("Please enter a valid deposit amount.");
+      return;
     }
+    setBalance(balance + depositBy);
+    setAmount("");
+    setShowD(true);
+    showNotification("Your deposit was successful!");
   }
 
   function Expanse() {
     const expanseBy = parseFloat(amount);
-    if (expanseBy > 0 && expanseBy <= balance) {
-      setBalance(balance - expanseBy);
-      setAmount("");
-      setShowE(true); 
-      showNotification("Your Expense recorded!");
+    if (amount === "" || expanseBy <= 0) {
+      showNotification("Please enter a valid expense amount.");
+      return;
     }
+    if (expanseBy > balance) {
+      showNotification("Insufficient balance for this expense.");
+      return;
+    }
+    setBalance(balance - expanseBy);
+    setAmount("");
+    setShowE(true);
+    showNotification("Your expense was recorded!");
   }
 
   function showNotification(message) {
     setNotification({ show: true, message });
-    setTimeout(() => setNotification({ show: false, message: "" }), 3000); 
+    setTimeout(() => setNotification({ show: false, message: "" }), 3000);
   }
 
   return (
