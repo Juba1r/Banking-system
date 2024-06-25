@@ -118,3 +118,16 @@ input {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
+
+.history-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #bacde2;
+}
+
+.history-container h2 {
+  margin-top: 0;
+}

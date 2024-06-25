@@ -10,6 +10,7 @@ const Banking = () => {
     show: false,
     message: "",
   });
+  const [history, setHistory] = useState([]);
 
   function Deposit() {
     const depositBy = parseFloat(amount);
@@ -18,6 +19,7 @@ const Banking = () => {
       return;
     }
     setBalance(balance + depositBy);
+    setHistory([...history, { type: "Deposit", amount: depositBy }]);
     setAmount("");
     setShowD(true);
     showNotification("Your deposit was successful!");
@@ -34,6 +36,7 @@ const Banking = () => {
       return;
     }
     setBalance(balance - expanseBy);
+    setHistory([...history, { type: "Expense", amount: expanseBy }]);
     setAmount("");
     setShowE(true);
     showNotification("Your expense was recorded!");
@@ -48,73 +51,86 @@ const Banking = () => {
     <div className="banking-container">
       <h1>Banking System</h1>
       <div className="current-balance">Current Balance: ${balance}</div>
-      <div className="input-container">
-        <div className="button-group">
-          <button className="button-52" onClick={() => setShowD(false)}>
-            Deposit
-          </button>
-          <button className="button-52" onClick={() => setShowE(false)}>
-            Expanse
-          </button>
-        </div>
-
-        {!showD && (
-          <div className="inptmodify-deposit">
-            <h2>Deposit</h2>
-            <div className="name-container">
-              <label htmlFor="Name">Name : </label>
-              <input type="text" placeholder="Enter the reason" />
-            </div>
-
-            <div className="amount-container">
-              <label htmlFor="amount">Amount : </label>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter amount"
-              />
-            </div>
-
-            <button className="submit-btn" onClick={Deposit}>
-              Submit
+      <div className="main-content">
+        <div className="input-container">
+          <div className="button-group">
+            <button className="button-52" onClick={() => setShowD(false)}>
+              Deposit
+            </button>
+            <button className="button-52" onClick={() => setShowE(false)}>
+              Expanse
             </button>
           </div>
-        )}
 
-        {!showE && (
-          <div className="inptmodify-expanse">
-            <h2>Expanse</h2>
-            <div className="name-container">
-              <label htmlFor="Name">Name : </label>
-              <input type="text" placeholder="Enter the reason" />
+          {!showD && (
+            <div className="inptmodify-deposit">
+              <h2>Deposit</h2>
+              <div className="name-container">
+                <label htmlFor="Name">Name : </label>
+                <input type="text" placeholder="Enter the reason" />
+              </div>
+
+              <div className="amount-container">
+                <label htmlFor="amount">Amount : </label>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="Enter amount"
+                />
+              </div>
+
+              <button className="submit-btn" onClick={Deposit}>
+                Submit
+              </button>
             </div>
+          )}
 
-            <div className="amount-container">
-              <label htmlFor="amount">Amount : </label>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter amount"
-              />
+          {!showE && (
+            <div className="inptmodify-expanse">
+              <h2>Expanse</h2>
+              <div className="name-container">
+                <label htmlFor="Name">Name : </label>
+                <input type="text" placeholder="Enter the reason" />
+              </div>
+
+              <div className="amount-container">
+                <label htmlFor="amount">Amount : </label>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="Enter amount"
+                />
+              </div>
+
+              <button className="submit-btn" onClick={Expanse}>
+                Submit
+              </button>
             </div>
+          )}
+        </div>
 
-            <button className="submit-btn" onClick={Expanse}>
-              Submit
-            </button>
+        {notification.show && (
+          <div
+            className="notification"
+            onClick={() => setNotification({ show: false, message: "" })}
+          >
+            {notification.message}
           </div>
         )}
       </div>
 
-      {notification.show && (
-        <div
-          className="notification"
-          onClick={() => setNotification({ show: false, message: "" })}
-        >
-          {notification.message}
-        </div>
-      )}
+      <div className="history-container">
+        <h2>Transaction History</h2>
+        <ul>
+          {history.map((item, index) => (
+            <li key={index}>
+              {item.type}: ${item.amount.toFixed(2)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
